@@ -24,7 +24,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Make artbooks. And actually got to have one of them bought by London's UAL
   historical collections department.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://marinlemaignan.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://marinlemaignan.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: marinlemaignan
 github_username:  marinlemaignan
 

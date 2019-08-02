@@ -81,7 +81,7 @@ function draw() {
 
   for (let i = 0; i < points.length; i++) {
     let p = points[i];
-    fill(255, 255, 255, map(g, 0, 10, 255, 15, true));
+    fill(0, 0, 0, map(g, 0, 10, 255, 15, true));
     noStroke();
     // debugger;
     ellipse(

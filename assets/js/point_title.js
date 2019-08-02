@@ -49,7 +49,7 @@
 
 let font;
 function preload() {
-  font = loadFont('css/Grenze-Bold.ttf');
+  font = loadFont('assets/css/Grenze-Bold.ttf');
 }
 
 let points;

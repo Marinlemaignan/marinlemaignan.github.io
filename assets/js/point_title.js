@@ -62,11 +62,11 @@ function setup() {
   // fill(255, 255, 204);
   noFill();
   // mouseMoved();
-  points = font.textToPoints('Marin le Maignan', 0, 0, 50, {
+  points = font.textToPoints('Marin le Maignan', 0, 0, 20, {
     sampleFactor: 1,
     simplifyThreshold: 0
   });
-  bounds = font.textBounds('Marin le Maignan', 0, 0, 50);
+  bounds = font.textBounds('Marin le Maignan', 0, 0, 20);
 }
 
 function draw() {
@@ -79,9 +79,16 @@ function draw() {
   var ratio = bounds.w / bounds.h ;
   // translate((windowWidth-(bounds.w*10))/2 , windowHeight);
   translate(windowWidth/2, windowHeight/2);
-  translate(-(bounds.w), -bounds.h/2)
+  translate(-(bounds.w*2  )-40, -bounds.h/2);
   // translate(bounds.w*abs(ratio)*10, bounds.h*abs(ratio)*10)
-  scale(2)
+  var scl ;
+  if (bounds.w > windowWidth) {
+    scl = windowWidth / bounds.w ;
+  } else {
+    scl =4
+  }
+
+  scale(scl)
   for (let i = 0; i < points.length; i++) {
     let p = points[i];
     fill(0, 0, 0, 120);
@@ -89,9 +96,9 @@ function draw() {
     // debugger;
     ellipse(
       p.x  +
-        sin(map(winMouseY, 0, height, 0, 50, true) * p.y / bounds.w + millis() / g) * width / 40,
+        sin(map(winMouseY, 0, height, 0, 50, true) * p.y / bounds.w + millis() / g) * width / 80,
       +p.y ,
-    sin(20 * p.y / winMouseX + millis() / g) * height / 200
+    sin(20 * p.y / winMouseX + millis() / g) * height / 400
     );
     // ellipse(
     //   p.x  + (random(2*g)),
@@ -113,10 +120,10 @@ function mouseMoved() {
   // redraw();
 }
 //
-// function windowResized() {
-//   // g = map(event.delta, 0, 100, 0, 1);
-//   g = map(winMouseY, 0, height, -10, 10, true)
-//   console.log(g);
-//   resizeCanvas(windowWidth-40, windowHeight-40);
-//   redraw();
-// }
+function windowResized() {
+  // g = map(event.delta, 0, 100, 0, 1);
+  g = map(winMouseY, 0, height, -10, 10, true)
+  // console.log(g);
+  resizeCanvas(windowWidth-40, windowHeight-40);
+  redraw();
+}

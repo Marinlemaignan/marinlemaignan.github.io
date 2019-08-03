@@ -61,46 +61,62 @@ function setup() {
   stroke(0);
   // fill(255, 255, 204);
   noFill();
-  mouseMoved();
-  points = font.textToPoints('M a r i n  L e  M a i g n a n', 0, 0, 1, {
-    sampleFactor: 25,
+  // mouseMoved();
+  points = font.textToPoints('Marin le Maignan', 0, 0, 50, {
+    sampleFactor: 1,
     simplifyThreshold: 0
   });
-  bounds = font.textBounds('M a r i n  L e  M a i g n a n', 0, 0, 1);
+  bounds = font.textBounds('Marin le Maignan', 0, 0, 50);
 }
 
 function draw() {
-  noLoop();
+  // noLoop();
   clear();
   background(0,0,0,0);
   // beginShape();
   // translate(-bounds.x * width / bounds.w , -bounds.y * height / bounds.h);
-  scale(0.5)
-  translate(windowWidth/2, windowHeight);
-
-
+  // scale(2)
+  var ratio = bounds.w / bounds.h ;
+  // translate((windowWidth-(bounds.w*10))/2 , windowHeight);
+  translate(windowWidth/2, windowHeight/2);
+  translate(-(bounds.w), -bounds.h/2)
+  // translate(bounds.w*abs(ratio)*10, bounds.h*abs(ratio)*10)
+  scale(2)
   for (let i = 0; i < points.length; i++) {
     let p = points[i];
-    fill(0, 0, 0, map(g, 0, 10, 255, 15, true));
+    fill(0, 0, 0, 120);
     noStroke();
     // debugger;
     ellipse(
-      ((p.x * width / bounds.w ) + random(2*g)) ,//+
-      //  sin(20 * p.y / bounds.h + millis() / 1000) * width / 30,,
-      (p.y * height/2 / bounds.h + random(2*g))/2,
-      5 *  map(g, 0, 10, 0.5, 3, true)
+      p.x  +
+        sin(map(winMouseY, 0, height, 0, 50, true) * p.y / bounds.w + millis() / g) * width / 40,
+      +p.y ,
+    sin(20 * p.y / winMouseX + millis() / g) * height / 200
     );
+    // ellipse(
+    //   p.x  + (random(2*g)),
+    //   p.y + (random(2*g)) +
+    //     sin(20 * p.y / bounds.h + millis() / 1000) * height / 30,
+    //   2 *  map(g, -10, 10, 0.1, 1, true)
+    // );
     // ellipse(p.x, p.y, 7)
   }
   // endShape(CLOSE);
 
 }
 
-// this function fires with mousewheel movement
-// anywhere on screen
+//
 function mouseMoved() {
   // g = map(event.delta, 0, 100, 0, 1);
-  g = map(winMouseY, 0, height, -10, 10, true)
-  console.log(g);
-  redraw();
+  g = map(winMouseY, 0, height, 1000, 4000, true)
+  // console.log(g);
+  // redraw();
 }
+//
+// function windowResized() {
+//   // g = map(event.delta, 0, 100, 0, 1);
+//   g = map(winMouseY, 0, height, -10, 10, true)
+//   console.log(g);
+//   resizeCanvas(windowWidth-40, windowHeight-40);
+//   redraw();
+// }
